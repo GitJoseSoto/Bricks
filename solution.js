@@ -32,15 +32,21 @@ function Square(){
     this.botLeft = {index:0 , brick: null},
     this.botRight =  {index:0 , brick: null},
     squares[this.id] = this;
+
+    if(this.id === 0){
+        this.getOutputBrickNumber(false, true);
+    }
 }
 
-/* Object Contructor for Bricks, they have the following properties
+/* Object Contructor for Bricks, they have the following properties 
 
     number - the number value given in the input
     rotation - the rotation of the Brick "Horizontal" or "Vertical"
     position - the position of the whole brick in relation to the Square "full or "half"
+
 */
 function Brick(number){
+    
     this.number = number;
     this.rotation = "";
     this.position = "";
@@ -194,7 +200,7 @@ Square.prototype = {
     },
 
     //Function that returns the stored static brick number in order to fill up the new brick Layer
-    getOutputBrickNumber: function(increment , clear){
+    getOutputBrickNumber: function(increment , clear = false){
 
         if (typeof this.getOutputBrickNumber.value === 'undefined'){
             
@@ -243,7 +249,6 @@ function organize()
             square.addBotRigth(botRightNumber , botRightIndex);
 
             square.generateTiles(outputTiles);
-            square.getOutputBrickNumber(false, true);
         }
     }
 }
@@ -262,7 +267,7 @@ function printBrickLayer(title , tiles){
         
             let brick = tiles[ x + (dimensions.width * y)];
             let outputTile = (brick > 9) ? brick.toString() : "0" + brick.toString();
-            line += ` ${outputTile}`;
+            line += `  ${outputTile}`;
         }
         output += line + "<br>";
     } 
@@ -289,6 +294,7 @@ function clear()
 // Function which accepts the user input and runs the program
 function solve(input){
 
+    squares = [];
     input = input || '0';
     let inputArray = inputToArray(input);
     dimensions.width = inputArray[0];
