@@ -207,7 +207,7 @@ Square.prototype = {
         }
         if(clear){
 
-            this.getOutputBrickNumber.valu = 0;
+            this.getOutputBrickNumber.value = 0;
         }
 
         return this.getOutputBrickNumber.value;
@@ -243,6 +243,7 @@ function organize()
             square.addBotRigth(botRightNumber , botRightIndex);
 
             square.generateTiles(outputTiles);
+            square.getOutputBrickNumber(false, true);
         }
     }
 }
@@ -318,7 +319,7 @@ function solve(input){
 
 //Function that return an array from a string taking the values between spaces
 function inputToArray(input){
-    
+
     return input.match(/\S+/g);
 }
 
