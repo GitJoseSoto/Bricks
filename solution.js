@@ -55,8 +55,8 @@ Square.prototype = {
     },
 
     // Function that returns the Square above the current square
-    topSquare:function()
-    {
+    topSquare:function(){
+
         return squares[this.id - (dimensions.width /2)];
     },
 
@@ -151,8 +151,8 @@ Square.prototype = {
     },
 
     // Function that generates the output tiles in the array selected as Parameter
-    generateTiles: function(outPutArray)
-    {
+    generateTiles: function(outPutArray){
+
         if( this.isfullVertical() ){
 
             outPutArray[this.topLeft.index] = this.getOutputBrickNumber(true);
@@ -171,12 +171,11 @@ Square.prototype = {
 
     
     // Function that returnes true if the Square has a full Horizontal Brick
-    isfullHorizontal: function()
-    {
+    isfullHorizontal: function(){
         
         if((this.topLeft.brick.rotation === "horizontal"  && this.topRight.brick.rotation === "hortizontal") || 
-        (this.botLeft.brick.rotation === "horizontal" && this.botRight.brick.rotation === "horizontal"))
-        {
+        (this.botLeft.brick.rotation === "horizontal" && this.botRight.brick.rotation === "horizontal")){
+            
             return true;
         }
 
@@ -184,11 +183,10 @@ Square.prototype = {
     },
 
     // Function that returnes true if the Square has a full Vertical Brick
-    isfullVertical: function()
-    {
+    isfullVertical: function(){
         if((this.topLeft.brick.rotation === "vertical"  && this.botLeft.brick.rotation === "vertical") || 
-        (this.topRight.brick.rotation === "vertical" && this.botRight.brick.rotation === "vertical"))
-        {
+        (this.topRight.brick.rotation === "vertical" && this.botRight.brick.rotation === "vertical")){
+            
             return true;
         }
 
@@ -196,16 +194,20 @@ Square.prototype = {
     },
 
     //Function that returns the stored static brick number in order to fill up the new brick Layer
-    getOutputBrickNumber: function(increment)
-    {
-        if (typeof this.getOutputBrickNumber.value === 'undefined')
-        {
+    getOutputBrickNumber: function(increment , clear){
+
+        if (typeof this.getOutputBrickNumber.value === 'undefined'){
+            
             this.getOutputBrickNumber.value = 0;
         }
          
-        if(increment)
-        {
+        if(increment){
+            
             this.getOutputBrickNumber.value++;
+        }
+        if(clear){
+
+            this.getOutputBrickNumber.valu = 0;
         }
 
         return this.getOutputBrickNumber.value;
@@ -246,8 +248,7 @@ function organize()
 }
 
 //Function that prints a Brick layer
-function printBrickLayer(title , tiles)
-{
+function printBrickLayer(title , tiles){
     // String of whole output
     let output = ` ${title} <br>`;
    
@@ -270,8 +271,8 @@ function printBrickLayer(title , tiles)
 }
 
 // Function which logs the error message
-function errorLog()
-{
+function errorLog(){
+
     // DOM element
     let element = document.getElementById("output");
     element.innerHTML = errorMessage;
@@ -285,8 +286,8 @@ function clear()
 }
 
 // Function which accepts the user input and runs the program
-function solve(input)
-{
+function solve(input){
+
     input = input || '0';
     let inputArray = inputToArray(input);
     dimensions.width = inputArray[0];
@@ -316,8 +317,8 @@ function solve(input)
 }
 
 //Function that return an array from a string taking the values between spaces
-function inputToArray(input)
-{
+function inputToArray(input){
+    
     return input.match(/\S+/g);
 }
 
